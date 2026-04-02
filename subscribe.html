@@ -87,6 +87,20 @@
         button:hover {
             background-color: #3a8eef;
         }
+        .success-message {
+            display: none;
+            padding: 12px;
+            margin-bottom: 20px;
+            background-color: #1a4d1a;
+            border: 1px solid #2d7d2d;
+            border-radius: 4px;
+            color: #6fdf6f;
+            text-align: center;
+            font-weight: 500;
+        }
+        .success-message.show {
+            display: block;
+        }
         .fine-print {
             margin-top: 30px;
             padding-top: 20px;
@@ -114,7 +128,11 @@
             <p>RickyD Assistant is a personal AI assistant that sends automated notifications, reminders, and alerts to the account owner. Messages include calendar reminders, system health alerts, and task completion notices.</p>
         </div>
 
-        <form class="form-section" onsubmit="return false;">
+        <div id="successMessage" class="success-message">
+            ✓ Submission Complete
+        </div>
+
+        <form id="subscribeForm" class="form-section">
             <label for="phone">Phone Number</label>
             <input type="tel" id="phone" name="phone" placeholder="+1 (555) 123-4567" required>
 
@@ -133,5 +151,23 @@
             <p>By subscribing, you agree to our <a href="terms.html">Terms of Service</a> and <a href="privacy.html">Privacy Policy</a>.</p>
         </div>
     </div>
+
+    <script>
+        document.getElementById('subscribeForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Show success message
+            const successMsg = document.getElementById('successMessage');
+            successMsg.classList.add('show');
+            
+            // Reset form
+            this.reset();
+            
+            // Hide success message after 3 seconds
+            setTimeout(function() {
+                successMsg.classList.remove('show');
+            }, 3000);
+        });
+    </script>
 </body>
 </html>
